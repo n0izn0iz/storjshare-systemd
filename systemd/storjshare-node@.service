@@ -1,0 +1,14 @@
+[Unit]
+Description=Storjshare Node
+After=storjshare-daemon.service
+Requires=storjshare-daemon.service
+
+[Service]
+Type=forking
+RemainAfterExit=yes
+ExecStart=/usr/bin/storjshare start -c %I
+ExecStop=/bin/sh -c "/usr/bin/storjshare stop -i $(basename %I .json)"
+User=storjshare
+
+[Install]
+WantedBy=storjshare-daemon.service

@@ -85,5 +85,8 @@
     "mocha": "^2.2.4",
     "proxyquire": "^1.7.3",
     "sinon": "^1.14.1"
+},
+  "optionalDependencies": {
+    "sd-notify": "^2.1.1"
   }
 }

@@ -1,0 +1,13 @@
+[Unit]
+Description=Storjshare Daemon
+After=network.target local-fs.target remote-fs.target
+
+[Service]
+Type=notify
+NotifyAccess=all
+ExecStart=/usr/bin/storjshare daemon -F
+ExecStop=/usr/bin/storjshare killall
+User=storjshare
+
+[Install]
+WantedBy=multi-user.target

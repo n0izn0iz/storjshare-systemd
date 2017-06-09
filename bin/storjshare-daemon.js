@@ -20,10 +20,19 @@ const api = new RPC({
   logVerbosity: config.daemonLogVerbosity
 });
 
+function notifySystemd() {
+	try {
+		const systemdNotify = require('sd-notify');
+		systemdNotify.ready();
+	} catch (exception) {
+
+	}
+}
+
 function startDaemonRpcServer() {
   dnode(api.methods)
     .on('error', (err) => api.jsonlogger.warn(err.message))
-    .listen(config.daemonRpcPort, config.daemonRpcAddress);
+    .listen(config.daemonRpcPort, config.daemonRpcAddress, notifySystemd);
 }
 
 utils.checkDaemonRpcStatus(config.daemonRpcPort, (isRunning) => {
